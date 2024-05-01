@@ -7,7 +7,7 @@ def clear_screen():
     """
     Clears the screen by printing newlines.
     """
-    print('\n' * 10)
+    print('\n' * 15)
 
 
 def display_board(board):
@@ -21,7 +21,6 @@ def display_board(board):
     print(board[1] + '|' + board[2] + '|' + board[3])
     print(board[4] + '|' + board[5] + '|' + board[6])
     print(board[7] + '|' + board[8] + '|' + board[9])
-
 
 
 def player_input():
@@ -54,8 +53,6 @@ def place_marker(board, marker, position):
     board[position] = marker
 
 
-
-
 def game_win_check(board, mark):
     """
     Checks if a player has won the game.
@@ -77,8 +74,6 @@ def game_win_check(board, mark):
             or (board[3] == mark and board[5] == mark and board[7] == mark))  # second diagonal check
 
 
-
-
 def player_choice():
     """
     Randomly selects which player will go first.
@@ -90,8 +85,6 @@ def player_choice():
         return 'Player 2'
     else:
         return 'Player 1'
-
-
 
 
 def space_check(board, position):
@@ -106,8 +99,6 @@ def space_check(board, position):
     bool: True if the space is empty, False otherwise.
     """
     return board[position] == ' '
-
-
 
 
 def full_board_check(board):
@@ -126,9 +117,6 @@ def full_board_check(board):
     return True
 
 
-
-
-
 def player_next_position(board):
     """
     Prompts the player to choose the next position on the board.
@@ -145,8 +133,6 @@ def player_next_position(board):
     while position not in range(1, 10) or not space_check(board, position):
         position = int(input('Please choose your next position from 1-9: '))
     return position
-
-
 
 
 def game_continue():
@@ -174,7 +160,9 @@ while True:
     turn = player_choice()  # check whose turn it is
     print(turn + ' Will go first!')  # display which player will go first
 
-    confirm = input('Are you ready to play? (y/n): ').upper()
+    confirm = 'wrong'
+    while confirm not in ['Y', 'N']:
+        confirm = input('Are you ready to play? (y/n): ').upper()
 
     if confirm == 'Y':
         game_on = True
