@@ -151,64 +151,64 @@ def game_continue():
 
 
 # Main driver code
+if __name__ == '__main__':
+    print('Welcome to Tic Tac Toe!')
 
-print('Welcome to Tic Tac Toe!')
+    while True:
+        game_board = [' '] * 10  # reset the game board
+        player1_marker, player2_marker = player_input()  # get player input
+        turn = player_choice()  # check whose turn it is
+        print(turn + ' Will go first!')  # display which player will go first
 
-while True:
-    game_board = [' '] * 10  # reset the game board
-    player1_marker, player2_marker = player_input()  # get player input
-    turn = player_choice()  # check whose turn it is
-    print(turn + ' Will go first!')  # display which player will go first
+        confirm = 'wrong'
+        while confirm not in ['Y', 'N']:
+            confirm = input('Are you ready to play? (y/n): ').upper()
 
-    confirm = 'wrong'
-    while confirm not in ['Y', 'N']:
-        confirm = input('Are you ready to play? (y/n): ').upper()
+        if confirm == 'Y':
+            game_on = True
+        elif confirm == 'N':
+            game_on = False
+        else:
+            pass
 
-    if confirm == 'Y':
-        game_on = True
-    elif confirm == 'N':
-        game_on = False
-    else:
-        pass
+        while game_on:
+            if turn == 'Player 1':  # player 1's turn
 
-    while game_on:
-        if turn == 'Player 1':  # player 1's turn
+                display_board(game_board)  # display game board
+                position = player_next_position(game_board)  # ask player for next position if space empty
+                place_marker(game_board, player1_marker, position)  # place player's marker in the board
 
-            display_board(game_board)  # display game board
-            position = player_next_position(game_board)  # ask player for next position if space empty
-            place_marker(game_board, player1_marker, position)  # place player's marker in the board
-
-            if game_win_check(game_board, player1_marker):  # check if player wins the game
-                display_board(game_board)
-                print('Congratulations! You WIN!')
-                game_on = False
-            else:  # check if the game is tied
-                if full_board_check(game_board):
+                if game_win_check(game_board, player1_marker):  # check if player1 wins the game
                     display_board(game_board)
-                    print('The Game is DRAW!')
-                    break
-                else:
-                    turn = 'Player 2'  # if game not tied then back to player 2's turn
+                    print('Congratulations! Player 1 WINS!')
+                    game_on = False
+                else:  # check if the game is tied
+                    if full_board_check(game_board):
+                        display_board(game_board)
+                        print('The Game is DRAW!')
+                        break
+                    else:
+                        turn = 'Player 2'  # if game not tied then back to player 2's turn
 
 
-        else:  # player 2's turn
+            else:  # player 2's turn
 
-            display_board(game_board)  # display game board
-            position = player_next_position(game_board)  # ask player for next position if space empty
-            place_marker(game_board, player2_marker, position)  # place player's marker in the board
+                display_board(game_board)  # display game board
+                position = player_next_position(game_board)  # ask player for next position if space empty
+                place_marker(game_board, player2_marker, position)  # place player's marker in the board
 
-            if game_win_check(game_board, player2_marker):  # check if player wins the game
-                display_board(game_board)
-                print('Congratulations! You WIN!')
-                game_on = False
-            else:  # check if the game is tied
-                if full_board_check(game_board):
+                if game_win_check(game_board, player2_marker):  # check if player2 wins the game
                     display_board(game_board)
-                    print('The Game is DRAW!')
-                    break
-                else:
-                    turn = 'Player 1'  # if game not tied then back to player 1's turn
+                    print('Congratulations! Player 2 WINS!')
+                    game_on = False
+                else:  # check if the game is tied
+                    if full_board_check(game_board):
+                        display_board(game_board)
+                        print('The Game is DRAW!')
+                        break
+                    else:
+                        turn = 'Player 1'  # if game not tied then back to player 1's turn
 
-    if not game_continue():  # exit the game
-        print('Thank you for playing!')
-        break
+        if not game_continue():  # exit the game
+            print('Thank you for playing! Exiting the Game......')
+            break
