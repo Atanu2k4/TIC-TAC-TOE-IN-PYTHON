@@ -150,8 +150,7 @@ def game_continue():
     return choice == 'Y'
 
 
-# Main driver code
-if __name__ == '__main__':
+def main():
     print('Welcome to Tic Tac Toe!')
 
     while True:
@@ -212,3 +211,8 @@ if __name__ == '__main__':
         if not game_continue():  # exit the game
             print('Thank you for playing! Exiting the Game......')
             break
+
+
+# Main driver code
+if __name__ == '__main__':
+    main()
