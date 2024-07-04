@@ -5,7 +5,7 @@ import os
 
 def clear_screen():
     """
-    Clears the screen using the appropriate command for the operating system.
+    Clears the screen using the appropriate command for the operating system. (Windows or Unix based OS)
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
