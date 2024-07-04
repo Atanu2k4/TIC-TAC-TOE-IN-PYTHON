@@ -1,13 +1,13 @@
 # Making a TIC-TAC-TOE game from scratch in python
 
 import random
-
+import os
 
 def clear_screen():
     """
-    Clears the screen by printing newlines.
+    Clears the screen using the appropriate command for the operating system.
     """
-    print('\n' * 15)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def display_board(board):
