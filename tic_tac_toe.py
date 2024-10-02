@@ -3,11 +3,23 @@
 import random
 import os
 
-def clear_screen():
+# global constants for Player1 and Player2
+p1 = 'Player1'
+p2 = 'Player2'
+
+
+def clear_screen() -> None:
     """
-    Clears the screen using the appropriate command for the operating system. (Windows or Unix based OS)
+    Clears the screen using the appropriate command for the operating system.
+    If running in an IDE (like PyCharm), it simply prints new lines.
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
+    if os.getenv('PYCHARM_HOSTED') or 'TERM' not in os.environ:
+        # In PyCharm or IDE, print new lines instead of clearing the screen
+        print("\n" * 50)
+    else:
+        # In a real terminal, clear the screen
+        os.system('cls' if os.name == 'nt' else 'clear')
+
 
 
 def display_board(board):
@@ -79,12 +91,12 @@ def player_choice():
     Randomly selects which player will go first.
 
     Returns:
-    str: Either 'Player 1' or 'Player 2'.
+    str: Either p1:'Player 1' or p2:'Player 2'.
     """
     if random.randint(0, 1) == 0:
-        return 'Player 2'
+        return p2
     else:
-        return 'Player 1'
+        return p1
 
 
 def space_check(board, position):
@@ -150,7 +162,7 @@ def game_continue():
     return choice == 'Y'
 
 
-def main():
+def main() -> None:
     print('Welcome to Tic Tac Toe!')
 
     while True:
@@ -167,11 +179,9 @@ def main():
             game_on = True
         elif confirm == 'N':
             game_on = False
-        else:
-            pass
 
         while game_on:
-            if turn == 'Player 1':  # player 1's turn
+            if turn == p1:  # player 1's turn
 
                 display_board(game_board)  # display game board
                 position = player_next_position(game_board)  # ask player for next position if space empty
@@ -187,7 +197,7 @@ def main():
                         print('The Game is DRAW!')
                         break
                     else:
-                        turn = 'Player 2'  # if game not tied then back to player 2's turn
+                        turn = p2  # if game not tied then back to player 2's turn
 
 
             else:  # player 2's turn
@@ -206,7 +216,7 @@ def main():
                         print('The Game is DRAW!')
                         break
                     else:
-                        turn = 'Player 1'  # if game not tied then back to player 1's turn
+                        turn = p1  # if game not tied then back to player 1's turn
 
         if not game_continue():  # exit the game
             print('Thank you for playing! Exiting the Game......')
